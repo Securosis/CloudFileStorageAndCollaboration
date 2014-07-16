@@ -20,7 +20,8 @@ The risk is pretty obvious: pick the wrong service, or configure it incorrectly,
 
 Practically speaking, file security is something most organizations have struggled with since long before the Internet. But cloud services enable us to extend our failures across the Internet.
 
->Tools vs. Services
+>Tools vs. Services  
+
 >You will notice we tend to focus on cloud storage and collaboration services, and not tools you implement yourself. While tools exist to create your own private file sync and share service, we don't feel these offer the benefits of a a true cloud service. Covering both would complicate this paper, especially since most of the concerns and questions are around cloud-native services, not internal tools the replicate some of their functionality.
 
 But pick the right service *and configure it properly*, and you can realize security benefits that are impossible with traditional file storage.
