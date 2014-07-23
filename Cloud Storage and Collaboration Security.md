@@ -83,28 +83,29 @@ This isn't an exhaustive list, but the key areas to focus your initial assessmen
 Managing users and access are the most important features after a security baseline. The entire security and governance model relies on it. These are the key elements to look for:
 
 * *Service and federated IDM:* The cloud service needs to implement an internal identity model to allow sharing with external parties without requiring those individuals or organizations to register with your internal identity provider. However, the service also needs to support federated identity so you can use your internal directory and don't need to manually register all of *your* users with the service. SAML is the preferred standard. Both models should support API access, which is key to integrating the service as back-end storage to your applications.
-* 
+* *Authorization and access controls:* Once you establish and integrate identity, the service should support a robust, granular permissions model. The basics include user and group access at the directory, sub-directory, and file levels. The model should integrate internal, external, and anonymous users. Permissions should include read, write/edit, download, and view (to allow web viewing, but not downloading of files). Additional permissions manage who can share a file (internal and external), alter permissions, comment, or delete files. 
+
+> External Users
+> An external, authenticated user is one that registers with the cloud provider, but isn't part of your organization. This is important for collaborative group shares, like deal and project rooms. Most services also support open external shares, but these are open to the world. That's why providers need to support both their own platform user model, and federated identity to integrate with your existing internal directory.
+
+* *Device control:* Cloud storage services are very frequently used to support mobile users on a variety of devices. Device control allows management of which devices (computer and mobile devices) are authorized for which users, to ensure only authorized devices gain access. 
+* *Two-factor authentication (2FA):* Since account credential compromise is a major concern, some providers support requiring a second authentication factor when accessing the service. Today, this is most typically a text message with a one time password sent to a registered mobile phone. Also, it is usually only triggered when accessing the service from a new or unregistered device or computer. 
+* *Centralized management:* Administrators can manage all permissions and sharing through the service's web interface. For enterprise deployments, this includes setting enterprise-wide policies, like restricting external sharing completely, or various sharing options (like auto-expiring all shared links after a certain amount of time). Admins should also be able to identify all shared links, without having to crawl through the directory structure.
+
+Sharing permissions and policies are a key differentiator between enterprise-class and consumer services. For enterprises, central control and management of shares is critical. As is the ability to manage who can share content externally, with what permissions, and to which categories of users (e.g. registered vs. an open file link). You might, for example, only allow employees to share with authenticated users on an enterprise-wide basis. Or only allow certain user roles to share files externally, and even then only with in-browser viewing only, with links set to expire in 30 days.
+
+All organizations have different tolerances for sharing and file permissions. Granular controls allow you to align your use of the service with your existing policies. These can also be a security benefit, since you gain centralized control over all storage, as opposed to the traditional model of having to manage dozens, if not thousands, of different systems with different authentication methods and authorization and permissions models.
+
+###Audit and transparency
+
+One of the most powerful security features of cloud storage services is a complete audit log of all user and device activity. Enterprise-class services track absolutely all activity — Which users touched which files from which devices. Features to look for include:
+
+* *Completeness of the audit log:* Ideally it includes user, device, what file was accessed, what activity was performed (download vs. view), and additional metadata, like location.
+* *Log duration:* How much data does the audit log contain? Is it eternal? Or does it expire in 90 days?
+* *Log management and visibility:* How do you access the log? Is the user interface navigable and centralized, or do you need to hunt around and click on individual files? Can you filter and generate reports by user, file, and device? 
+* *Integration and export:* Logs should be externally consumable in a standard format to integrate with existing log management and SIEM tools. Administrators should also be able to export activity reports and raw logs.
+
+These features don't cover everything all the services offer, but are the core-set of security capabilities enterprise and business users should start with.
 
 
-
-API support
-Authorization and Access control
-Granular permissions model
-Roles and assets
-Permissions
-Basic IRM - read only access? control copy and paste? 
-Centralized management (plus a UI that malses it accessible)
-Device control
-2FA
-Importance of sharing permissions.
-Sharing IAM considerations
-Open vs. authenticated.
-Authentication methods.
-Sharing duration and permissions model
-Audit and Transparency
-Audit history
-User and device based
-Central management and visibility
-Integration and export
-Alerting
 
