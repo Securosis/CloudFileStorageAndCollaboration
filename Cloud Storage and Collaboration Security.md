@@ -108,3 +108,86 @@ One of the most powerful security features of cloud storage services is a comple
 * *Integration and export:* Logs should be externally consumable in a standard format to integrate with existing log management and SIEM tools. Administrators should also be able to export activity reports and raw logs.
 
 These features don't cover everything offered by these services, but they are the core security capabilities enterprise and business users should have to start with.
+
+##Additional Security Features
+
+The core security features are a baseline most enterprise or business customers should look for when selecting a service for their organization, but the various services also offer a plethora of additional security features. Providers see this as a way to entice enterprise users onto the services, show advantages over traditional storage infrastructure, and create competitive differentiation.
+
+In other words, security is seen as both a competitive baseline and a competitive differentiator, which is why we see new capabilities appearing on a consistent basis. Thus, odds are high this report isn't going to cover everything that is potentially available by the time you read it.
+
+###Universal search and investigation support
+
+As we covered earlier, most cloud storage providers track all files, enable content search, and track every user and every device that accesses a file, including who viewed it in a web browser, downloaded a copy, or syncs it with a computer or device.
+
+Having a central control point enables some fairly powerful security capabilities. Worried a document leaked? Find all copies and the entire access history. Now an obvious caveat applies — once a file leaves the service it isn't tracked, but at least you have a starting point to identify where it went. This is often one of the more difficult first steps in any leak/breach/abuse investigation since traditional storage products rarely track this level of detail.
+
+Enhancing this is full content indexing and search. This isn't purely a security feature, but does allow you to search your entire cloud storage repository for keywords or other specific content. Some providers offer options for more-advanced searches, particularly *regular expressions*. Since this is useful for non-security reasons, we expect indexing and searching capabilities to increase over time, but make sure you understand what your provider supports for now.
+
+Another limitation is that providers don't support every possible document type. For example, the odds are low your CAD file format is supported (today). Typically standard Office and text formats are supported, and check with your potential providers rather than assuming. 
+
+###Client-managed encryption
+
+All enterprise-class cloud storage providers encrypt data in their back-end, but they manage the keys and can thus technically see your content. There are now third-party security vendors who encrypt cloud data using different approaches, and some cloud storage vendors are adapting their architectures to allow customers to encrypt directly within the service, but control their own keys.
+
+This is a different approach than using a third-party tool. Your cloud provider still handles the encryption in their back end, but you control the encryption keys. There are two major options:
+
+* The cloud platform endpoint agents handle encryption operations synchronized with your enterprise key store. To work, they need to include this capability in both workstation and mobile agents, and a mechanism for integrating key distribution. 
+* The cloud platform manages encryption in their back end, but opens mechanisms for enterprise users to provision and manage their own keys. From a technical standpoint, there are a few ways to handle this, but typically it will involve a Hardware Security Module (HSM) that is either located in the cloud provider's data centers yet managed by the client, or is in a client data center or infrastructure cloud provider. The important part is that the customer, not the cloud provider, is the only one that manages the keys. Technically they are exposed in the cloud provider's data center during crypto operations, but architected correctly the risk of key exposure can be minimized.
+
+We won't be surprised to see other approaches develop over time, but these are the two we know are either on the market, or will be soon. In both cases, the customer needs their own key management infrastructure.
+
+**One major warning — encrypting data with your own key breaks most or all collaboration features and any indexing/search since the cloud provider can never see the content.** As such, it is something you should generally limit to your most sensitive data. Apply it to everything, and you may see users try to circumvent encryption so they can regain the other features of the platform.
+
+###Data Loss Prevention
+
+If you think about it, full-text index and search combined with a complete audit log of all activity associated with a file is effectively a form of Data Loss Prevention (DLP). This meets the definition of basic content-aware DLP.
+
+In addition, the cloud provider can offer real-time monitoring of all content based on these search terms, and tie that to enforcement policies. For example, the cloud storage provider could quarantine a file anytime a credit card number is found, and alert an administrator. This supports enterprise-wide content policies for the entire cloud storage platform.
+
+More advanced rules could apply on a user or group basis, restrict only certain activities (e.g. "never share a file with PII or this keyword in it externally", or any other combination of analysis and rules (like device restrictions). DLP takes full content index and search, and combines it with persistent policies for near-real time content-aware protection.
+
+The market for integrated DLP is still extremely early, and when it is available the features tend to be limited. Third party integration can provide more capability, and as with everything we expect to see capabilities expand at a reasonable pace. In discussions with clients this seems to be a popular requirement, which will continue to push the market along.
+
+###DRM/IRM
+
+Digital Rights Management, also known as Information Rights Management, is defined as encrypting data and then limiting usage through rights policies. For example, allowing someone to view a file but not email or print it.
+
+Since cloud file storage and collaboration services often include an in-browser reader, and granular rights policies, they can enable a limited version of DRM. Set a policy so a file can only be viewed in a browser, and never downloaded, and you can limit activity. 
+
+However, to be truly considered DRM the service should include in-browser protections against actions like screen capture. Ideally the platform can directly, or through third-party integration, allow document markup and editing, not merely viewing. On the horizon we expect to see services that define DRM policies at the file level via integration with on-premise enterprise DRM, not that anyone is really using that.
+
+###Device security
+
+At the most basic level, the cloud service should support restricting content only to approved devices, and include integration for federated identity. The service should also track all files the device downloaded. Content on the device should be encrypted, either using a proprietary mechanism or native app encryption on the device.
+
+For content security, some providers allow remote wiping of the service's app, effectively destroying the data. Another option is to remotely log out the application, which also restricts access to the data, although depending on the encryption a forensic-level recovery may still be possible if the data (or encryption key) isn't deliberately wiped.
+
+Providers are also exploring additional mobile device features, predominantly centered around Mobile Device Management-like capabilities to better understand the device configuration and even detect certain forms of jailbreaking or other compromise that could expose data on devices.
+
+###API support
+
+Nearly all cloud storage providers support a robust API for integration into other applications and services. It is becoming an essential baseline feature for the market. However, not all APIs are created equal. From the security standpoint, all security features should be API enabled to support integration with existing and future tools. 
+
+###Integrations
+
+While APIs provide the hooks, there are a few common categories of security tools we tend to see pre-integrated more commonly. This is often enabled by vendor partnerships, the API support we mention above, and/or making data from the service (especially security audit logs) consumable in standard formats. Established integrations save you time, and are officially supported, as opposed to coding up something yourself.
+
+Some of the most common and useful integrations include:
+
+* *Cloud security gateways:* This product category has a number of names, but includes products that identify cloud services used by your organization and use multiple techniques to add security (such as more granular controls, inline encryption, better security management, or DLP). 
+* *Encryption gateways:* While sometimes a feature of cloud security gateways, these stand-alone products proxy connections to the cloud provider and selectively encrypt data. We aren't the biggest fans of this approach due to the logistics and effects on the cloud service features, but it's a viable option of encryption is mandated and not supported by your vendor.
+* *Digital Rights Management:* While we see very few successful enterprise-wide DRM deployments, new providers focused on mobile collaboration scenarios have emerged and appear to support some valuable use cases. 
+* *Mobile Device Management:* This integration allows greater granularity and control of what devices and which users can connect to the cloud service.
+* *SIEM/log management:* The SIEM tool collects activity directly from the cloud provider and integrates it into consolidated logging, alerting features, and even correlation with other security events.
+
+We also see integrations developing with electronic discovery tools, standard DLP, business intelligence, and others as new use cases emerge. As enterprise adoption of cloud file storage vendors increases, we expect to see many more integrations emerge.
+
+##Conclusions, and a caution
+
+This biggest concern about using a cloud file storage and collaboration service is the worry of entrusting your sensitive information, sometimes your *most* sensitive information, to an outsider that mixes it up with everyone else's data. That can be a tall mental hurdle to leap, especially when your experience is with consumer services with spotty security records.
+
+However, using a secure, enterprise-class service brings some demonstrable security advantages. It reduces file sprawl and provides a total view of all activity that is effectively impossible with our traditional storage practices. Add on some security features, like content indexing and search, and some creative security solutions emerge. Full visibility and control is a heck of a powerful tool.
+
+Despite these advantages, you still need to be careful. One security foible can expose all your files to the entire Internet. These providers need to be absolutely best in class, with extensive transparency, strong governance, and continuous, massive, security testing and dedicated security teams. Even then you might need the occasional dash of encryption to add more assurance you control, especially if you are concerned with government snooping.
+
+Do your homework, choose widely, and you will gain the kind of governance over your files most security professionals never dreamed could actually happen.
